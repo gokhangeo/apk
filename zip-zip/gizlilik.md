@@ -2,7 +2,7 @@
 
 Son güncelleme: 28 Ekim 2026
 
-Zıp Zıp, Gökhan Elgül tarafından geliştirilen çevrimdışı bir zıplama oyunudur.
+Zıp Zıp, çevrimdışı çalışan bir zıplama oyunudur.
 
 **Toplanan veriler:** Yok. Oyun internete bağlanmaz (internet izni istemez), hesap açtırmaz, reklam göstermez,
 konum, kişi, fotoğraf ya da cihaz kimliği gibi hiçbir kişisel veriyi toplamaz, saklamaz veya üçüncü taraflarla paylaşmaz.
