@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ev-ekrani-v0.2.44",
+  "name": "Ev Ekranı 0.2.44",
+  "draft": false,
+  "prerelease": false,
+  "body": "İş akışları: Kutu Kurucu, Ev Ekranı, TurkIPTV, Araç Ekranı ve Zip Zip sürümleri apk deposuna aynalanır (APK_DEPLOY_KEY)\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
+  "assets": [
+   {
+    "name": "EvEkrani.apk",
+    "size": 55628021,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=44"
+   }
+  ]
+ },
+ {
   "tag_name": "kutu-kurucu-v1.32",
   "name": "Kutu Kurucu 1.32",
   "draft": false,
