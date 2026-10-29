@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "winkeeper-android-v0.1.7",
+  "name": "WinKeeper Android 0.1.7",
+  "draft": false,
+  "prerelease": false,
+  "body": "## Ana ekran widget'ı\n- **Yeni widget**: ana ekrana WinKeeper widget'ı ekle. RAM ve depolama halkası, tek dokunuşla **⚡ Hızlandır** ve **🧹 Temizle**.\n- Widget'taki Temizle yalnızca güvenli dosyaları siler: önbellekler, küçük resimler, geçici/günlük dosyalar, boş klasörler.\n- **Durum sekmesi düzeltildi**: düğmeler artık her dokunuşta çalışıyor, sayfa titremiyor.\n- Güncellemeler artık herkese açık apk deposundan geliyor.\n\n## Çöp kutusu ve otomatik güncelleme\n- **Çöp kutusu**: sildiğin dosya ve klasörler 30 gün boyunca geri yüklenebilir; yeni \"Çöp\" sekmesinden geri yükle, kalıcı sil ya da boşalt.\n- **Çoklu seçim**: Analiz'de klasör ve dosyaları işaretleyip tek seferde sil.\n- Silerken seçim: \"Çöp kutusuna taşı\" ya da \"Kalıcı olarak sil\".\n- **Otomatik güncelleme**: uygulama açılınca yeni sürümü bulur, yenilikleri gösterir ve tek dokunuşla günceller.\n\n## 0.1.2\n- İlk Android sürümü: Temizle, Kaldır, Başlangıç, Analiz, Durum.\n\nAPK'yı telefona indirip açın. Bu sürümden sonra WinKeeper kendini otomatik günceller.",
+  "assets": [
+   {
+    "name": "WinKeeper.apk",
+    "size": 82784,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/WinKeeper.apk?v=7"
+   }
+  ]
+ },
+ {
   "tag_name": "turkiptv-v2.53",
   "name": "TurkIPTV 2.53",
   "draft": false,
