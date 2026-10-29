@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "turkiptv-v2.46",
+  "name": "TurkIPTV 2.46",
+  "draft": false,
+  "prerelease": false,
+  "body": "İş akışları: Kutu Kurucu, Ev Ekranı, TurkIPTV, Araç Ekranı ve Zip Zip sürümleri apk deposuna aynalanır (APK_DEPLOY_KEY)\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
+  "assets": [
+   {
+    "name": "TurkIPTV.apk",
+    "size": 1838398,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=146"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.43",
   "name": "arac-ekrani-v1.0.43",
   "draft": false,
@@ -57,20 +71,6 @@
     "name": "ZipZip.apk",
     "size": 548144,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=14"
-   }
-  ]
- },
- {
-  "tag_name": "turkiptv-v2.45",
-  "name": "TurkIPTV 2.45",
-  "draft": false,
-  "prerelease": false,
-  "body": "Güncellemeler herkese açık gokhangeo/apk deposundan (rea gizli)\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
-  "assets": [
-   {
-    "name": "TurkIPTV.apk",
-    "size": 1838403,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=145"
    }
   ]
  }
