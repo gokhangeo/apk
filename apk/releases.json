@@ -1,5 +1,24 @@
 [
  {
+  "tag_name": "kutu-kurucu-v1.33",
+  "name": "Kutu Kurucu 1.33",
+  "draft": false,
+  "prerelease": false,
+  "body": "Kutu Kurucu: github.com/.../blob/... APK bağlantısı raw dosyaya çevrilir\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
+  "assets": [
+   {
+    "name": "KutuKurucu.apk",
+    "size": 251518,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=33"
+   },
+   {
+    "name": "KutuKurucu-Kurulum.apk",
+    "size": 659840,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=33"
+   }
+  ]
+ },
+ {
   "tag_name": "turkiptv-v2.46",
   "name": "TurkIPTV 2.46",
   "draft": false,
@@ -38,25 +57,6 @@
     "name": "EvEkrani.apk",
     "size": 55628021,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=44"
-   }
-  ]
- },
- {
-  "tag_name": "kutu-kurucu-v1.32",
-  "name": "Kutu Kurucu 1.32",
-  "draft": false,
-  "prerelease": false,
-  "body": "İş akışları: Kutu Kurucu, Ev Ekranı, TurkIPTV, Araç Ekranı ve Zip Zip sürümleri apk deposuna aynalanır (APK_DEPLOY_KEY)\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
-  "assets": [
-   {
-    "name": "KutuKurucu.apk",
-    "size": 251426,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=32"
-   },
-   {
-    "name": "KutuKurucu-Kurulum.apk",
-    "size": 659840,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=32"
    }
   ]
  },
