@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "zip-zip-v1.14",
+  "name": "zip-zip-v1.14",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "ZipZip.apk",
+    "size": 548144,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=14"
+   }
+  ]
+ },
+ {
   "tag_name": "turkiptv-v2.45",
   "name": "TurkIPTV 2.45",
   "draft": false,
