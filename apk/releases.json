@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "klipler-v1.0.1",
+  "name": "Klipler 1.0.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "Klipler: TV box için ayrı uygulama (kumanda desteği, klipler doğrudan uygulama içinde oynar)\n\nMüzik klipleri: kategoriler, arama, klipler uygulama içinde doğrudan oynar. TV box (kumanda) ve telefon.",
+  "assets": [
+   {
+    "name": "Klipler.apk",
+    "size": 5628781,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.56",
   "name": "arac-ekrani-v1.0.56",
   "draft": false,
