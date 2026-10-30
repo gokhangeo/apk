@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "radyo-v1.0.1",
+  "name": "Radyo 1.0.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "Radyo: yeni uygulama (53 Türk radyosu, logolar, favoriler, yedek adres + otomatik yeniden bağlanma, TV kumandası desteği)\n\nTürk radyoları: logolu liste, favoriler, kopmalara karşı otomatik yeniden bağlanma. Araç ünitesi, telefon ve TV box.",
+  "assets": [
+   {
+    "name": "Radyo.apk",
+    "size": 4938381,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Radyo.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "turkiptv-v2.63",
   "name": "TurkIPTV 2.63",
   "draft": false,
