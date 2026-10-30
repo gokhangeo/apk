@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "turkiptv-v2.63",
+  "name": "TurkIPTV 2.63",
+  "draft": false,
+  "prerelease": false,
+  "body": "Araç Ekranı: Yarım Ekran yerine Yan Panel (hava, 3 kısayol, Küçült, gizle oku); CarPlay hiç kendiliğinden açılmaz. TurkIPTV: Yan Panel için favori seçici (FLOAT_PICK)\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
+  "assets": [
+   {
+    "name": "TurkIPTV.apk",
+    "size": 1854161,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=163"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.54",
   "name": "arac-ekrani-v1.0.54",
   "draft": false,
@@ -10,20 +24,6 @@
     "name": "AracEkrani.apk",
     "size": 19702916,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=54"
-   }
-  ]
- },
- {
-  "tag_name": "turkiptv-v2.60",
-  "name": "TurkIPTV 2.60",
-  "draft": false,
-  "prerelease": false,
-  "body": "TurkIPTV: film/dizi altyazısı varsayılan kapalı, kumandadan aç-kapat (#53)\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
-  "assets": [
-   {
-    "name": "TurkIPTV.apk",
-    "size": 1852598,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=160"
    }
   ]
  },
