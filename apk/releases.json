@@ -1,5 +1,24 @@
 [
  {
+  "tag_name": "kutu-kurucu-v1.44",
+  "name": "Kutu Kurucu 1.44",
+  "draft": false,
+  "prerelease": false,
+  "body": "Temizlik: Kutu Kurucu paneline hızlı temizlik + gereksiz uygulama kapatma; Ev Ekranı ≡ tuşu Kutu Kurucu ile derin temizlik yapar\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
+  "assets": [
+   {
+    "name": "KutuKurucu.apk",
+    "size": 257742,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=44"
+   },
+   {
+    "name": "KutuKurucu-Kurulum.apk",
+    "size": 659840,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=44"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.59",
   "name": "arac-ekrani-v1.0.59",
   "draft": false,
@@ -24,25 +43,6 @@
     "name": "Klipler.apk",
     "size": 5630991,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=4"
-   }
-  ]
- },
- {
-  "tag_name": "kutu-kurucu-v1.43",
-  "name": "Kutu Kurucu 1.43",
-  "draft": false,
-  "prerelease": false,
-  "body": "Kutu Kurucu: Klipler hazır uygulamalara ve sessiz güncellemeye eklendi\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
-  "assets": [
-   {
-    "name": "KutuKurucu.apk",
-    "size": 252794,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=43"
-   },
-   {
-    "name": "KutuKurucu-Kurulum.apk",
-    "size": 659840,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=43"
    }
   ]
  },
