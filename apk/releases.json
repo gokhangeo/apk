@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "arac-ekrani-v1.0.53",
-  "name": "arac-ekrani-v1.0.53",
+  "tag_name": "arac-ekrani-v1.0.54",
+  "name": "arac-ekrani-v1.0.54",
   "draft": false,
   "prerelease": false,
   "body": "",
   "assets": [
    {
     "name": "AracEkrani.apk",
-    "size": 19699280,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=53"
+    "size": 19702916,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=54"
    }
   ]
  },
