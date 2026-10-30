@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "bulutsuz-v1.0.1",
+  "name": "Bulutsuz 1.0.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "Bulutsuz APK iş akışı\n\nBulutsuz Transfer Android: Paylaş menüsünden bulutsuz (WebRTC) gönderim, QR ile alma, alınan dosyalar İndirilenler/Bulutsuz klasörüne. iPhone (hub-ios) ve Windows ile uyumlu.",
+  "assets": [
+   {
+    "name": "Bulutsuz.apk",
+    "size": 642201,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Bulutsuz.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "ev-ekrani-v0.2.53",
   "name": "Ev Ekranı 0.2.53",
   "draft": false,
