@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ev-ekrani-v0.2.53",
+  "name": "Ev Ekranı 0.2.53",
+  "draft": false,
+  "prerelease": false,
+  "body": "Temizlik: Kutu Kurucu paneline hızlı temizlik + gereksiz uygulama kapatma; Ev Ekranı ≡ tuşu Kutu Kurucu ile derin temizlik yapar\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
+  "assets": [
+   {
+    "name": "EvEkrani.apk",
+    "size": 55629273,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=53"
+   }
+  ]
+ },
+ {
   "tag_name": "kutu-kurucu-v1.44",
   "name": "Kutu Kurucu 1.44",
   "draft": false,
@@ -71,20 +85,6 @@
     "name": "TurkIPTV.apk",
     "size": 1854161,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=163"
-   }
-  ]
- },
- {
-  "tag_name": "ev-ekrani-v0.2.48",
-  "name": "Ev Ekranı 0.2.48",
-  "draft": false,
-  "prerelease": false,
-  "body": "Ev Ekranı: günün menüsü yerine dalgalanan Türk bayrağı (canvas animasyonu)\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
-  "assets": [
-   {
-    "name": "EvEkrani.apk",
-    "size": 55629269,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=48"
    }
   ]
  },
