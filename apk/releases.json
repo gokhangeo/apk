@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "klipler-v1.0.4",
+  "name": "Klipler 1.0.4",
+  "draft": false,
+  "prerelease": false,
+  "body": "Klipler: Canlı Müzik artık TV kanalları (Kral Pop, Kral TV, Number 1, Power, Dream Türk, TRT Müzik) — HLS doğrudan, yedek adres\n\nMüzik klipleri: kategoriler, arama, klipler uygulama içinde doğrudan oynar. TV box (kumanda) ve telefon.",
+  "assets": [
+   {
+    "name": "Klipler.apk",
+    "size": 5630991,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=4"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.58",
   "name": "arac-ekrani-v1.0.58",
   "draft": false,
@@ -10,20 +24,6 @@
     "name": "AracEkrani.apk",
     "size": 21919557,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=58"
-   }
-  ]
- },
- {
-  "tag_name": "klipler-v1.0.3",
-  "name": "Klipler 1.0.3",
-  "draft": false,
-  "prerelease": false,
-  "body": "Klipler: Çocuk Şarkıları kartı kaldırıldı\n\nMüzik klipleri: kategoriler, arama, klipler uygulama içinde doğrudan oynar. TV box (kumanda) ve telefon.",
-  "assets": [
-   {
-    "name": "Klipler.apk",
-    "size": 5629815,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=3"
    }
   ]
  },
