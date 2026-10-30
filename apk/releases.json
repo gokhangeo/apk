@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "arac-ekrani-v1.0.59",
+  "name": "arac-ekrani-v1.0.59",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "AracEkrani.apk",
+    "size": 21920691,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=59"
+   }
+  ]
+ },
+ {
   "tag_name": "klipler-v1.0.4",
   "name": "Klipler 1.0.4",
   "draft": false,
@@ -10,20 +24,6 @@
     "name": "Klipler.apk",
     "size": 5630991,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=4"
-   }
-  ]
- },
- {
-  "tag_name": "arac-ekrani-v1.0.58",
-  "name": "arac-ekrani-v1.0.58",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "AracEkrani.apk",
-    "size": 21919557,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=58"
    }
   ]
  },
