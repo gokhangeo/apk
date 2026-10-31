@@ -1,0 +1,33 @@
+{
+  "name": "Gplay",
+  "identifier": "com.gokhan.gplay.source",
+  "subtitle": "YouTube ve web videoları, kilitte de çalar",
+  "apps": [
+    {
+      "name": "Gplay",
+      "bundleIdentifier": "com.gokhan.gplay",
+      "developerName": "gokhangeo",
+      "subtitle": "Araçta video oynatıcı",
+      "localizedDescription": "YouTube ve web videolarını yerel oynatıcıda açar; telefon kilitliyken çalmaya devam eder, AirPlay ile araç ekranına gönderir. CarPlay video ekranı Apple izniyle açılır.",
+      "tintColor": "e62832",
+      "version": "1.1",
+      "versionDate": "2026-10-31T11:38:36Z",
+      "downloadURL": "https://raw.githubusercontent.com/gokhangeo/apk/main/ipa/Gplay.ipa?v=1",
+      "size": 152853,
+      "versions": [
+        {
+          "version": "1.1",
+          "date": "2026-10-31T11:38:36Z",
+          "downloadURL": "https://raw.githubusercontent.com/gokhangeo/apk/main/ipa/Gplay.ipa?v=1",
+          "size": 152853,
+          "minOSVersion": "17.0"
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [],
+        "privacy": {}
+      }
+    }
+  ],
+  "news": []
+}
