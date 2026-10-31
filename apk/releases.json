@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "zip-zip-v1.24",
+  "name": "zip-zip-v1.24",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "ZipZip.apk",
+    "size": 549688,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=24"
+   }
+  ]
+ },
+ {
   "tag_name": "bulutsuz-v1.0.1",
   "name": "Bulutsuz 1.0.1",
   "draft": false,
@@ -99,20 +113,6 @@
     "name": "TurkIPTV.apk",
     "size": 1854161,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=163"
-   }
-  ]
- },
- {
-  "tag_name": "zip-zip-v1.19",
-  "name": "zip-zip-v1.19",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "ZipZip.apk",
-    "size": 549688,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=19"
    }
   ]
  },
