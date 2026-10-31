@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "turkiptv-v2.65",
-  "name": "TurkIPTV 2.65",
+  "tag_name": "turkiptv-v2.66",
+  "name": "TurkIPTV 2.66",
   "draft": false,
   "prerelease": false,
-  "body": "TurkIPTV: küçük pencere hep normal boyutta açılır, çift dokunma ilk boyuta döner; direksiyon ⏭⏮ tuşları kanal değiştirir (MediaSession)\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
+  "body": "TurkIPTV: Yan Panel/CarPlay kanal seçici önce kategoriler (üstte Favoriler), uzun basınca favori\n\nTurkIPTV Android TV box uygulaması. Kurulu uygulama bu sürümü kendisi bulur ve 'Güncelleme hazır' diye sorar.",
   "assets": [
    {
     "name": "TurkIPTV.apk",
-    "size": 1855955,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=165"
+    "size": 1859151,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=166"
    }
   ]
  },
