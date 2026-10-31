@@ -1,7 +1,7 @@
 [
  {
-  "tag_name": "zip-zip-v1.24",
-  "name": "zip-zip-v1.24",
+  "tag_name": "zip-zip-v1.26",
+  "name": "zip-zip-v1.26",
   "draft": false,
   "prerelease": false,
   "body": "",
@@ -9,7 +9,7 @@
    {
     "name": "ZipZip.apk",
     "size": 549688,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=24"
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/ZipZip.apk?v=26"
    }
   ]
  },
