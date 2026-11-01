@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "ev-ekrani-v0.2.58",
-  "name": "Ev Ekranı 0.2.58",
+  "tag_name": "ev-ekrani-v0.2.59",
+  "name": "Ev Ekranı 0.2.59",
   "draft": false,
   "prerelease": false,
-  "body": "Revert \"Dosyalar: ayrı APK (com.gokhan.dosyalar) — TV dosya yöneticisi; Kutu Kurucu listesinde, sessiz güncelleme ve dosya izni; Ev Ekranı Dosyalar düğmesi kuruluysa onu açar\"\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
+  "body": "Dosyalar: Uygulamalar bölümü — yüklü uygulamalar boyutlarıyla, OK ile kaldır / aç / bilgi\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
   "assets": [
    {
     "name": "EvEkrani.apk",
-    "size": 55684796,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=58"
+    "size": 55684848,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=59"
    }
   ]
  },
