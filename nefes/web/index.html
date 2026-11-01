@@ -942,6 +942,14 @@ const DOSYALAR = {
 const PAKETLER = [['p850', '0850 numaraları', 'Çağrı merkezleri ve tele-satış.'], ['p444', '444 numaraları', 'Kurumsal hatlar. Kargo ve bankalar da kullanır.'], ['p800', '0800 numaraları', 'Ücretsiz hatlar. Nadiren arar.']];
 const MODLAR = [['kapali', 'Kapalı'], ['sessiz', 'Sessize al'], ['engelle', 'Engelle']];
 const kalkanDurum = () => jsonOku(() => A.kalkanDurum(), { sdk: 0, paket: {}, kendi: [], kurallar: [] });
+/** 518432 -> "~519 bin", 1250000 -> "~1,3 milyon" (topluluk listesinin kapsadığı numara sayısı). */
+function kisaSayi(n) {
+  n = Number(n) || 0;
+  if (n >= 1e6) return '~' + (Math.round(n / 1e5) / 10).toLocaleString('tr-TR') + ' milyon';
+  if (n >= 1e4) return '~' + Math.round(n / 1000).toLocaleString('tr-TR') + ' bin';
+  return n.toLocaleString('tr-TR');
+}
+const kapsamOf = (d) => d.spamKapsam ?? d.spamSayi ?? 0;
 const ARAMA = {
   ad: 'Arama', gezegen: 'jupiter', renk: '#8fa8ff',
   yeniMod: 'engelle', guncelleniyor: false,
@@ -954,12 +962,12 @@ const ARAMA = {
       <div class="kh stagger ${acik ? '' : 'kapali'}"><div class="kalkan-ikon">${acik ? SHIELD : SHIELD_OFF}</div>
         <div class="grow"><h3>Arama Kalkanı ${acik ? 'açık' : 'kapalı'}</h3>
           <small>${!destek ? 'Android 10 ve üstü gerekir.' : acik ? 'Spam ve istenmeyen aramalar çalmadan durdurulur. Rehberdekiler hep geçer.' : 'Açmak için Nefes\'i "Arayan kimliği ve spam" uygulaması yapın.'}</small>
-          ${acik ? `<div class="sayac"><div><b>${gunluk.length}</b><small>durdurulan</small></div><div><b>${bugun}</b><small>son 24 saat</small></div><div><b>${d.spamSayi}</b><small>listede</small></div></div>` : ''}
+          ${acik ? `<div class="sayac"><div><b>${gunluk.length}</b><small>durdurulan</small></div><div><b>${bugun}</b><small>son 24 saat</small></div><div><b>${kisaSayi(kapsamOf(d))}</b><small>numara</small></div></div>` : ''}
           ${destek ? `<button class="${acik ? 'sm' : 'pill'}" data-a="rol" style="margin-top:10px">${acik ? 'Ayarı değiştir' : 'Kalkanı aç'}</button>` : ''}</div></div>
       ${!d.rehber ? `<div class="banner" style="margin:0 0 10px"><span style="font-size:20px">👥</span><div class="grow">Rehberdeki kişilerin asla engellenmemesi için rehber izni verin.</div><button class="sm" data-a="rehber">İzin ver</button></div>` : ''}
       <h4>Kaynaklar</h4>
       <div class="kart stagger" style="--i:1">
-        <div class="sat dik"><div class="ust"><span class="ic">🌐</span><div class="grow"><b>Ortak spam listesi</b><small>${d.spamSayi.toLocaleString('tr-TR')} numara · son güncelleme ${once(d.spamZaman)}</small></div>${sw(d.topluluk, 'data-ayar="topluluk"')}</div>
+        <div class="sat dik"><div class="ust"><span class="ic">🌐</span><div class="grow"><b>Topluluk listesi</b><small>${kisaSayi(kapsamOf(d))} numara · son güncelleme ${once(d.spamZaman)}</small></div>${sw(d.topluluk, 'data-ayar="topluluk"')}</div>
           <div style="display:flex;gap:8px;align-items:center"><button class="sm" data-a="guncelle" ${s.guncelleniyor ? 'disabled' : ''}>${s.guncelleniyor ? '<span class="spin"></span> Güncelleniyor' : 'Şimdi güncelle'}</button><small style="flex:1">Her gün kendiliğinden yenilenir.</small></div></div>
         <div class="sat"><span class="ic">🕶️</span><div class="grow"><b>Gizli numaraları engelle</b><small>Numarasını gizleyen arayanlar</small></div>${sw(d.gizliNumara, 'data-ayar="gizliNumara"')}</div>
       </div>
@@ -1003,7 +1011,7 @@ const ARAMA = {
   },
   async guncelle(elle) {
     const s = this; if (s.guncelleniyor) return; s.guncelleniyor = !!elle; if (elle) yerindeCiz(s);
-    try { const r = await cagir('spamGuncelle', !!elle); if (elle) toast(`Ortak liste güncellendi · ${r.sayi} numara.`, 'ok'); }
+    try { const r = await cagir('spamGuncelle', !!elle); if (elle) toast(`Topluluk listesi güncellendi · ${kisaSayi(r.kapsam ?? r.sayi)} numara.`, 'ok'); }
     catch (e) { if (elle) toast('Güncellenemedi: ' + e.message, 'err'); }
     s.guncelleniyor = false;
     if (aktif === 'kalkan' && SAYFALAR.kalkan.aktifAlt === 'arama') yerindeCiz(s);
