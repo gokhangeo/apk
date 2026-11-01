@@ -1,0 +1,45 @@
+name: Zararlı listesi
+# Nefes Güvenlik taraması için zararlı dosya hash'leri, paket adları ve imza sertifikaları (her gün).
+# Büyük ikili listeler depo geçmişini şişirmesin diye "nefes-zararli" sürümüne (release) yüklenir;
+# depoya yalnızca küçük nefes/zararli-liste.json yazılır. İsteğe bağlı gizli: MB_AUTH_KEY (abuse.ch, ücretsiz).
+on:
+  schedule:
+    - cron: "47 2 * * *"
+  workflow_dispatch:
+    inputs:
+      taban:
+        description: "Tabanı (haftalık büyük listeyi) şimdi yeniden kur"
+        type: boolean
+        default: false
+  push:
+    paths: ["nefes/zararli-topla.py", ".github/workflows/zararli-listesi.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: zararli-listesi
+  cancel-in-progress: false
+jobs:
+  guncelle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Listeyi topla
+        env:
+          MB_AUTH_KEY: ${{ secrets.MB_AUTH_KEY }}
+        run: python3 nefes/zararli-topla.py ${{ (github.event_name == 'workflow_dispatch' && inputs.taban) && '--taban' || '' }}
+      - name: Sürüme yükle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view nefes-zararli >/dev/null 2>&1 || gh release create nefes-zararli --title "Nefes zararlı listesi" \
+            --notes "Nefes Güvenlik taraması için otomatik güncellenen zararlı hash listeleri. Elle değiştirmeyin." --latest=false
+          gh release upload nefes-zararli nefes/zararli-cikti/*.bin.gz --clobber
+      - name: Özeti depoya yaz
+        run: |
+          git config user.name "nefes-bot"; git config user.email "nefes-bot@users.noreply.github.com"
+          git add nefes/zararli-liste.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Zararlı listesi güncellendi"
+          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((i * 5)); done
+          exit 1
