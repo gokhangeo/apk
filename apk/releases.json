@@ -1,5 +1,24 @@
 [
  {
+  "tag_name": "kutu-kurucu-v1.47",
+  "name": "Kutu Kurucu 1.47",
+  "draft": false,
+  "prerelease": false,
+  "body": "Kutu Kurucu: Bağlantıdan kur listesine Ev Ekranı (sürüm durumu ve tek dokunuşla kurulum)\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
+  "assets": [
+   {
+    "name": "KutuKurucu.apk",
+    "size": 258066,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=47"
+   },
+   {
+    "name": "KutuKurucu-Kurulum.apk",
+    "size": 659840,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=47"
+   }
+  ]
+ },
+ {
   "tag_name": "ev-ekrani-v0.2.56",
   "name": "Ev Ekranı 0.2.56",
   "draft": false,
@@ -10,25 +29,6 @@
     "name": "EvEkrani.apk",
     "size": 55684796,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=56"
-   }
-  ]
- },
- {
-  "tag_name": "kutu-kurucu-v1.46",
-  "name": "Kutu Kurucu 1.46",
-  "draft": false,
-  "prerelease": false,
-  "body": "Ev Ekranı: Dosyalar — kumandayla dosya yöneticisi (USB, küçük resimler, resim görüntüleyici, oynatıcı, APK kurma, kopyala/taşı/sil, telefondan QR ile gönderme); Kutu Kurucu dosya iznini ADB ile verir\n\nİki TV kutusuna telefondan/PC'den APK kurma ve ana ekran seçme aracı. Kurulum: depodaki kutu-kurucu/README.md.",
-  "assets": [
-   {
-    "name": "KutuKurucu.apk",
-    "size": 258026,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu.apk?v=46"
-   },
-   {
-    "name": "KutuKurucu-Kurulum.apk",
-    "size": 659840,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/KutuKurucu-Kurulum.apk?v=46"
    }
   ]
  },
