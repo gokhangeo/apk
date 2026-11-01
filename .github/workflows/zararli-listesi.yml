@@ -38,8 +38,15 @@ jobs:
       - name: Özeti depoya yaz
         run: |
           git config user.name "nefes-bot"; git config user.email "nefes-bot@users.noreply.github.com"
-          git add nefes/zararli-liste.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Zararlı listesi güncellendi"
-          for i in 1 2 3 4; do git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0; sleep $((i * 5)); done
+          cp nefes/zararli-liste.json /tmp/zl.json
+          # Yüklenen ikili dosyalarla eşleşen özet her zaman bizimki olmalı: depo değiştiyse onun üstüne yeniden yazılır.
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            cp /tmp/zl.json nefes/zararli-liste.json
+            git add nefes/zararli-liste.json
+            git diff --cached --quiet && exit 0
+            git commit -q -m "Zararlı listesi güncellendi"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
           exit 1
