@@ -161,8 +161,13 @@ def virusshare(adet):
     def f():
         sayfa = al("https://virusshare.com/hashes").decode("utf-8", "ignore")
         nolar = sorted(set(int(x) for x in re.findall(r"VirusShare_(\d+)\.md5", sayfa)))
-        for n in nolar[-adet:]:
-            for l in al(f"https://virusshare.com/hashfiles/VirusShare_{n:05d}.md5", 300).splitlines():
+        alinan = 0
+        for n in reversed(nolar):
+            if alinan >= adet: break
+            try: veri = al(f"https://virusshare.com/hashfiles/VirusShare_{n:05d}.md5", 300)
+            except Exception as e: print("  virusshare", n, e); continue
+            alinan += 1
+            for l in veri.splitlines():
                 l = l.strip()
                 if len(l) == 32 and not l.startswith(b"#"): md5.add(l.decode().lower())
     return f
