@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "arac-ekrani-v1.0.63",
-  "name": "Araç Ekranı 1.0.63",
+  "tag_name": "arac-ekrani-v1.0.64",
+  "name": "arac-ekrani-v1.0.64",
   "draft": false,
   "prerelease": false,
-  "body": "Araç Ekranı: Radyo — ünitenin kendi alıcısı (araç anteni, TWUtil), animasyonlu kadran, tam tarama, sıralama, favoriler, RDS",
+  "body": "",
   "assets": [
    {
     "name": "AracEkrani.apk",
-    "size": 21934102,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=63"
+    "size": 21937369,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AracEkrani.apk?v=64"
    }
   ]
  },
