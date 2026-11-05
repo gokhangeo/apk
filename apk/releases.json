@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "akilli-ogretmen-v1.0.3",
+  "name": "Akıllı Öğretmen 1.0.3",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "AkilliOgretmen.apk",
+    "size": 92079,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AkilliOgretmen.apk?v=3"
+   }
+  ]
+ },
+ {
   "tag_name": "minik-dostlar-v1.0.6",
   "name": "Minik Dostlar 1.0.6",
   "draft": false,
