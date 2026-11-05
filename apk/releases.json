@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "minik-dostlar-v1.0.1",
+  "name": "Minik Dostlar 1.0.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "MinikDostlar.apk",
+    "size": 72968,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/MinikDostlar.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "arac-ekrani-v1.0.66",
   "name": "arac-ekrani-v1.0.66",
   "draft": false,
