@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "turbo-kosu-v1.1",
+  "name": "turbo-kosu-v1.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "TurboKosu.apk",
+    "size": 380815,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurboKosu.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "minik-dostlar-v1.0.11",
   "name": "Minik Dostlar 1.0.11",
   "draft": false,
