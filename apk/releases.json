@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "pamuk-v1.0.1",
+  "name": "Pamuk",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Pamuk.apk",
+    "size": 33113811,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Pamuk.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "turbo-kosu-v1.1",
   "name": "turbo-kosu-v1.1",
   "draft": false,
