@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "pamuk-v1.1.12",
-  "name": "Pamuk 1.1.12",
+  "tag_name": "pamuk-v1.1.14",
+  "name": "Pamuk 1.1.14",
   "draft": false,
   "prerelease": false,
   "body": "",
   "assets": [
    {
     "name": "Pamuk.apk",
-    "size": 18821134,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Pamuk.apk?v=13"
+    "size": 18822750,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Pamuk.apk?v=15"
    }
   ]
  },
