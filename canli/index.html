@@ -84,7 +84,8 @@ async function start() {
       if (!remoteSet) queued.push(o.payload.candidate);
       else { try { await pc.addIceCandidate(o.payload.candidate); } catch (e) {} }
     }
-    else if (o.type === "LEAVE" || o.type === "EXPIRE") { if (o.src === tabletId || o.type === "EXPIRE") end("Tablet yayını bitirdi."); }
+    else if (o.type === "LEAVE" && o.src === tabletId) end("Tablet yayını bitirdi. Yeniden izlemek için Telegram'da \"Yeniden canlı izle\"ye basın.");
+    else if (o.type === "EXPIRE") end("Bu bağlantı artık geçerli değil (bağlantılar tek kullanımlık). Telegram'da \"Yeniden canlı izle\"ye basın.");
     else if (o.type === "ID-TAKEN" || o.type === "ERROR") end("Sunucu hatası: " + (o.payload && o.payload.msg || o.type));
   };
 }
