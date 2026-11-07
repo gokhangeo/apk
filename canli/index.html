@@ -54,6 +54,7 @@ function end(msg) {
   if (mic) mic.getTracks().forEach(t => t.stop());
   clearInterval(hb);
   $("talk").disabled = true;
+  try { const vs = $("v").srcObject; if (vs) vs.getTracks().forEach(t => t.stop()); $("v").srcObject = null; $("v").removeAttribute("src"); $("v").load(); } catch (e) {}
   status(msg || "Bitti.");
 }
 
