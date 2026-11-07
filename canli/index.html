@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pamuk · Canlı</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #0b1020; color: #e8ecf8; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  #wrap { position: fixed; inset: 0; display: flex; flex-direction: column; }
+  video { flex: 1; width: 100%; min-height: 0; object-fit: contain; background: #000; }
+  #bar { display: flex; gap: 10px; align-items: center; padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); background: #141b33; }
+  #status { flex: 1; font-size: 15px; opacity: .9; }
+  button { font: inherit; font-size: 17px; border: 0; border-radius: 14px; padding: 14px 18px; color: #fff; background: #2b3a6b; }
+  #talk { background: #3b7dd8; min-width: 120px; touch-action: none; user-select: none; -webkit-user-select: none; }
+  #talk.on { background: #e0533d; }
+  #start { position: absolute; inset: 0; margin: auto; width: 220px; height: 64px; font-size: 20px; background: #3b7dd8; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <video id="v" playsinline autoplay></video>
+  <div id="bar">
+    <div id="status">Hazırlanıyor…</div>
+    <button id="talk" disabled>🎙 Konuş</button>
+    <button id="end">Bitir</button>
+  </div>
+</div>
+<button id="start" hidden>▶ Canlı izle</button>
+<script>
+// Pamuk canlı izleme. Tablet ile PeerJS bulut sinyal sunucusunun WebSocket protokolüyle konuşur
+// (OPEN / OFFER / ANSWER / CANDIDATE / LEAVE / HEARTBEAT); görüntü ve ses doğrudan (ya da TURN üzerinden) gelir.
+const ICE = [
+  { urls: "stun:stun.l.google.com:19302" },
+  { urls: ["turn:openrelay.metered.ca:80", "turn:openrelay.metered.ca:443", "turn:openrelay.metered.ca:443?transport=tcp"],
+    username: "openrelayproject", credential: "openrelayproject" },
+];
+const $ = (id) => document.getElementById(id);
+const status = (t) => { $("status").textContent = t; };
+const hash = decodeURIComponent(location.hash.slice(1));
+const dot = hash.lastIndexOf(".");
+const tabletId = dot > 0 ? hash.slice(0, dot) : "";
+const token = dot > 0 ? hash.slice(dot + 1) : "";
+let ws, pc, mic, hb, myId, connId, ended = false, remoteSet = false, queued = [];
+
+function rnd(n) { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, b => (b % 36).toString(36)).join(""); }
+
+function end(msg) {
+  if (ended) return; ended = true;
+  try { ws && ws.readyState === 1 && ws.send(JSON.stringify({ type: "LEAVE", dst: tabletId })); } catch (e) {}
+  try { pc && pc.close(); } catch (e) {}
+  try { ws && ws.close(); } catch (e) {}
+  if (mic) mic.getTracks().forEach(t => t.stop());
+  clearInterval(hb);
+  $("talk").disabled = true;
+  status(msg || "Bitti.");
+}
+
+async function start() {
+  $("start").hidden = true;
+  if (!tabletId || !token) { status("Bağlantı geçersiz. Telegram'dan /canli ile yeni bağlantı alın."); return; }
+  status("Mikrofon izni (konuşmak için)…");
+  try {
+    mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true }, video: false });
+  } catch (e) {
+    mic = null; // izin yoksa yalnızca izlenir
+  }
+  myId = "izle-" + rnd(12);
+  connId = "mc_" + rnd(12);
+  status("Sunucuya bağlanılıyor…");
+  ws = new WebSocket(`wss://0.peerjs.com:443/peerjs?key=peerjs&id=${myId}&token=${rnd(10)}&version=1.5.4`);
+  ws.onclose = () => { if (!ended && (!pc || pc.connectionState !== "connected")) end("Sinyal bağlantısı kapandı."); };
+  ws.onerror = () => {};
+  ws.onmessage = async (m) => {
+    let o; try { o = JSON.parse(m.data); } catch (e) { return; }
+    if (o.type === "OPEN") { hb = setInterval(() => ws.readyState === 1 && ws.send('{"type":"HEARTBEAT"}'), 5000); call(); }
+    else if (o.type === "ANSWER" && o.src === tabletId) {
+      await pc.setRemoteDescription(o.payload.sdp); remoteSet = true; status("Bağlanıyor…");
+      for (const c of queued) { try { await pc.addIceCandidate(c); } catch (e) {} }
+      queued = [];
+    }
+    else if (o.type === "CANDIDATE" && o.src === tabletId && o.payload && o.payload.candidate) {
+      if (!remoteSet) queued.push(o.payload.candidate);
+      else { try { await pc.addIceCandidate(o.payload.candidate); } catch (e) {} }
+    }
+    else if (o.type === "LEAVE" || o.type === "EXPIRE") { if (o.src === tabletId || o.type === "EXPIRE") end("Tablet yayını bitirdi."); }
+    else if (o.type === "ID-TAKEN" || o.type === "ERROR") end("Sunucu hatası: " + (o.payload && o.payload.msg || o.type));
+  };
+}
+
+async function call() {
+  status("Tablet aranıyor…");
+  pc = new RTCPeerConnection({ iceServers: ICE });
+  pc.addTransceiver("video", { direction: "recvonly" });
+  if (mic) { const t = mic.getAudioTracks()[0]; t.enabled = false; pc.addTransceiver(t, { direction: "sendrecv", streams: [mic] }); }
+  else pc.addTransceiver("audio", { direction: "recvonly" });
+  const stream = new MediaStream();
+  $("v").srcObject = stream;
+  pc.ontrack = (e) => { stream.addTrack(e.track); $("v").play().catch(() => {}); };
+  pc.onicecandidate = (e) => {
+    if (!e.candidate) return;
+    ws.send(JSON.stringify({ type: "CANDIDATE", dst: tabletId, payload: { candidate: e.candidate.toJSON(), type: "media", connectionId: connId } }));
+  };
+  pc.onconnectionstatechange = () => {
+    const s = pc.connectionState;
+    if (s === "connected") { status("Canlı ●"); $("talk").disabled = !mic; }
+    else if (s === "disconnected") status("Bağlantı zayıf…");
+    else if (s === "failed") end("Bağlantı kurulamadı (ağ engeli).");
+    else if (s === "closed") end();
+  };
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  ws.send(JSON.stringify({ type: "OFFER", dst: tabletId, payload: {
+    sdp: { type: offer.type, sdp: offer.sdp }, type: "media", connectionId: connId, metadata: { token }, browser: "pamuk-izle" } }));
+  setTimeout(() => { if (!ended && pc.connectionState !== "connected") status("Tablet yanıt vermiyor… (bağlantı süresi dolmuş olabilir)"); }, 20000);
+}
+
+function talk(on) {
+  if (!mic) return;
+  mic.getAudioTracks().forEach(t => t.enabled = on);
+  $("talk").classList.toggle("on", on);
+  $("talk").textContent = on ? "🔴 Konuşuyor" : "🎙 Konuş";
+}
+const tb = $("talk");
+tb.addEventListener("pointerdown", (e) => { e.preventDefault(); tb.setPointerCapture(e.pointerId); talk(true); });
+["pointerup", "pointercancel", "lostpointercapture"].forEach(ev => tb.addEventListener(ev, () => talk(false)));
+$("end").onclick = () => end("Bitirildi.");
+window.addEventListener("pagehide", () => end());
+// Ses otomatik çalsın diye bir dokunuşla başlat.
+$("start").hidden = false; $("start").onclick = start;
+status("Başlatmak için dokunun.");
+</script>
+</body>
+</html>
