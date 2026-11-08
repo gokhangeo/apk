@@ -15,12 +15,14 @@
   button { font: inherit; font-size: 17px; border: 0; border-radius: 14px; padding: 14px 18px; color: #fff; background: #2b3a6b; }
   #talk { background: #3b7dd8; min-width: 120px; touch-action: none; user-select: none; -webkit-user-select: none; }
   #talk.on { background: #e0533d; }
+  #me { position: absolute; top: 12px; right: 12px; width: 28vw; max-width: 180px; border-radius: 12px; background: #000; z-index: 2; transform: scaleX(-1); }
   #start { position: absolute; inset: 0; margin: auto; width: 220px; height: 64px; font-size: 20px; background: #3b7dd8; }
 </style>
 </head>
 <body>
 <div id="wrap">
   <video id="v" playsinline autoplay></video>
+  <video id="me" playsinline autoplay muted hidden></video>
   <div id="bar">
     <div id="status">Hazırlanıyor…</div>
     <button id="talk" disabled>🎙 Konuş</button>
@@ -38,6 +40,8 @@ const ICE = [
 ];
 const $ = (id) => document.getElementById(id);
 const status = (t) => { $("status").textContent = t; };
+const CALL = new URLSearchParams(location.search).has("g");
+if (CALL) { document.title = "Pamuk · Görüntülü görüşme"; }
 const hash = decodeURIComponent(location.hash.slice(1));
 const dot = hash.lastIndexOf(".");
 const tabletId = dot > 0 ? hash.slice(0, dot) : "";
@@ -52,6 +56,7 @@ function end(msg) {
   try { pc && pc.close(); } catch (e) {}
   try { ws && ws.close(); } catch (e) {}
   if (mic) mic.getTracks().forEach(t => t.stop());
+  try { $("me").srcObject = null; $("me").hidden = true; } catch (e) {}
   clearInterval(hb);
   $("talk").disabled = true;
   try { const vs = $("v").srcObject; if (vs) vs.getTracks().forEach(t => t.stop()); $("v").srcObject = null; $("v").removeAttribute("src"); $("v").load(); } catch (e) {}
@@ -61,12 +66,15 @@ function end(msg) {
 async function start() {
   $("start").hidden = true;
   if (!tabletId || !token) { status("Bağlantı geçersiz. Telegram'dan /canli ile yeni bağlantı alın."); return; }
-  status("Mikrofon izni (konuşmak için)…");
+  status(CALL ? "Kamera ve mikrofon izni…" : "Mikrofon izni (konuşmak için)…");
   try {
-    mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true }, video: false });
+    mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true },
+      video: CALL ? { facingMode: "user", width: { ideal: 640 }, height: { ideal: 480 } } : false });
   } catch (e) {
     mic = null; // izin yoksa yalnızca izlenir
+    if (CALL) { try { mic = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } }); } catch (e2) {} }
   }
+  if (CALL && mic && mic.getVideoTracks().length) { $("me").srcObject = new MediaStream(mic.getVideoTracks()); $("me").hidden = false; }
   myId = "izle-" + rnd(12);
   connId = "mc_" + rnd(12);
   status("Sunucuya bağlanılıyor…");
@@ -94,8 +102,10 @@ async function start() {
 async function call() {
   status("Tablet aranıyor…");
   pc = new RTCPeerConnection({ iceServers: ICE });
-  pc.addTransceiver("video", { direction: "recvonly" });
-  if (mic) { const t = mic.getAudioTracks()[0]; t.enabled = false; pc.addTransceiver(t, { direction: "sendrecv", streams: [mic] }); }
+  const cam = CALL && mic ? mic.getVideoTracks()[0] : null;
+  if (cam) pc.addTransceiver(cam, { direction: "sendrecv", streams: [mic] });
+  else pc.addTransceiver("video", { direction: "recvonly" });
+  if (mic && mic.getAudioTracks().length) { const t = mic.getAudioTracks()[0]; t.enabled = CALL; pc.addTransceiver(t, { direction: "sendrecv", streams: [mic] }); }
   else pc.addTransceiver("audio", { direction: "recvonly" });
   const stream = new MediaStream();
   $("v").srcObject = stream;
@@ -106,7 +116,7 @@ async function call() {
   };
   pc.onconnectionstatechange = () => {
     const s = pc.connectionState;
-    if (s === "connected") { status("Canlı ●"); $("talk").disabled = !mic; }
+    if (s === "connected") { status(CALL ? "Görüşmede ●" : "Canlı ●"); $("talk").disabled = !mic; }
     else if (s === "disconnected") status("Bağlantı zayıf…");
     else if (s === "failed") end("Bağlantı kurulamadı (ağ engeli).");
     else if (s === "closed") end();
@@ -114,22 +124,32 @@ async function call() {
   const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
   ws.send(JSON.stringify({ type: "OFFER", dst: tabletId, payload: {
-    sdp: { type: offer.type, sdp: offer.sdp }, type: "media", connectionId: connId, metadata: { token }, browser: "pamuk-izle" } }));
+    sdp: { type: offer.type, sdp: offer.sdp }, type: "media", connectionId: connId, metadata: { token, call: CALL }, browser: "pamuk-izle" } }));
   setTimeout(() => { if (!ended && pc.connectionState !== "connected") status("Tablet yanıt vermiyor… (bağlantı süresi dolmuş olabilir)"); }, 20000);
 }
 
+let muted = false;
 function talk(on) {
   if (!mic) return;
+  if (CALL) return;
   mic.getAudioTracks().forEach(t => t.enabled = on);
   $("talk").classList.toggle("on", on);
   $("talk").textContent = on ? "🔴 Konuşuyor" : "🎙 Konuş";
 }
 const tb = $("talk");
+if (CALL) {
+  tb.textContent = "🔇 Sessize al";
+  tb.addEventListener("click", () => {
+    muted = !muted; mic && mic.getAudioTracks().forEach(t => t.enabled = !muted);
+    tb.classList.toggle("on", muted); tb.textContent = muted ? "🎙 Sesi aç" : "🔇 Sessize al";
+  });
+}
 tb.addEventListener("pointerdown", (e) => { e.preventDefault(); tb.setPointerCapture(e.pointerId); talk(true); });
 ["pointerup", "pointercancel", "lostpointercapture"].forEach(ev => tb.addEventListener(ev, () => talk(false)));
 $("end").onclick = () => end("Bitirildi.");
 window.addEventListener("pagehide", () => end());
 // Ses otomatik çalsın diye bir dokunuşla başlat.
+if (CALL) $("start").textContent = "📞 Görüşmeyi başlat";
 $("start").hidden = false; $("start").onclick = start;
 status("Başlatmak için dokunun.");
 </script>
