@@ -1,0 +1,31 @@
+{
+ "name": "Netlik",
+ "identifier": "com.gokhan.netlik.kaynak",
+ "apps": [
+  {
+   "name": "Netlik",
+   "bundleIdentifier": "com.gokhan.netlik",
+   "developerName": "Gökhan",
+   "subtitle": "Yapay zekâ foto stüdyosu",
+   "localizedDescription": "Fotoğraf büyütme, yüz iyileştirme, arka plan silme ve AI Stüdyo. Site güncellendikçe uygulama da kendiliğinden güncellenir.",
+   "iconURL": "https://gokhangeo.github.io/upscale/icons/icon-512.png",
+   "tintColor": "7C5CFF",
+   "version": "1.1",
+   "versionDate": "2026-11-12",
+   "downloadURL": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.ipa?v=1",
+   "size": 417995,
+   "versions": [
+    {
+     "version": "1.1",
+     "buildVersion": "1",
+     "date": "2026-11-12",
+     "downloadURL": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.ipa?v=1",
+     "size": 417995,
+     "localizedDescription": "Netlik güncellemesi",
+     "minOSVersion": "15.0"
+    }
+   ]
+  }
+ ],
+ "news": []
+}

@@ -1,5 +1,24 @@
 [
  {
+  "tag_name": "netlik-ios-v1.1",
+  "name": "Netlik iOS 1.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Netlik.ipa",
+    "size": 417995,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.ipa?v=1"
+   },
+   {
+    "name": "netlik-sidestore.json",
+    "size": 975,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/netlik-sidestore.json?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "pamuk-v1.1.44",
   "name": "Pamuk 1.1.44",
   "draft": false,
