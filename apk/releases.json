@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "netlik-v1.1",
+  "name": "netlik-v1.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Netlik.apk",
+    "size": 209460,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.apk?v=1"
+   }
+  ]
+ },
+ {
   "tag_name": "zip-zip-v1.28",
   "name": "zip-zip-v1.28",
   "draft": false,
