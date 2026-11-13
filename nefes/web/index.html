@@ -1129,12 +1129,27 @@ const ARAMA = {
 
 /* ================= KALKAN > SMS ================= */
 const KARAR = { normal: ['Normal', '#7cc4ff'], islem: ['İşlem', '#6ee0a0'], promosyon: ['Promosyon', '#ffcf6e'], gereksiz: ['Gereksiz', '#ff6b6b'] };
+// "zararli": bağlantısı Siber Güvenlik Başkanlığı (SGB) zararlı adres listesinde olan SMS (kural seçiminde yok).
+const KARAR_AD = (k) => k === 'zararli' ? ['Zararlı bağlantı', '#ff4d6d'] : (KARAR[k] || KARAR.normal);
+const sgbBilgi = () => jsonOku(() => A.sgbBilgi(), { var: false, sayi: 0, smsAcik: true, guncelleme: '', indirme: 0, hata: '' });
+const sgbMetni = (b) => b && b.var
+  ? `${kisaSayi(b.sayi)} zararlı alan adı${b.guncelleme ? ' · liste ' + kisaTarih(b.guncelleme) : ''}${b.indirme ? ' · indirildi ' + once(b.indirme) : ''}`
+  : `Liste henüz inmedi${b && b.hata ? ` (${b.hata})` : ''} · internet varken kendiliğinden iner`;
+async function sgbGuncelleDugme(x, etiket) {
+  if (!x || x.disabled) return; x.disabled = true; const eski = x.textContent; x.innerHTML = '<span class="spin"></span>';
+  try {
+    const r = await cagir('sgbGuncelle', true);
+    toast(`SGB listesi ${r.yeni ? 'güncellendi' : 'zaten güncel'} · ${kisaSayi(r.sayi)} alan adı.`, 'ok');
+    if (etiket) etiket.textContent = sgbMetni(r);
+  } catch (er) { toast('SGB listesi güncellenemedi: ' + er.message, 'err'); if (etiket) etiket.textContent = sgbMetni(sgbBilgi()); }
+  x.disabled = false; x.textContent = eski;
+}
 const SMS = {
   ad: 'SMS', gezegen: 'jupiter', renk: '#b39cff',
   tarama: null, taraniyor: false, kTur: 'kelime', kKarar: 'gereksiz',
   goster() { this.ciz(); },
   ciz() {
-    const s = this, d = kalkanDurum(), yak = jsonOku(() => A.yakalananSms(), []);
+    const s = this, d = kalkanDurum(), yak = jsonOku(() => A.yakalananSms(), []), sg = sgbBilgi();
     const acik = d.bildirim && d.smsAcik;
     const t = s.tarama;
     const tSay = t ? Object.values(t.sayi).reduce((a, b) => a + b, 0) || 1 : 1;
@@ -1149,6 +1164,11 @@ const SMS = {
       <div class="kart stagger" style="--i:1">
         <div class="sat"><span class="ic">🛡️</span><div class="grow"><b>Gereksiz SMS bildirimlerini gizle</b><small>Mesaj SMS uygulamanızda kalır, yalnızca bildirimi gelmez.</small></div>${sw(d.smsAcik, 'data-ayar="smsAcik"')}</div>
         <div class="sat"><span class="ic">🏷️</span><div class="grow"><b>Promosyonları da gizle</b><small>Kampanya ve indirim mesajları</small></div>${sw(d.promosyon, 'data-ayar="promosyon"')}</div>
+      </div>
+      <h4>Zararlı bağlantılar</h4>
+      <div class="kart stagger" style="--i:2" data-k="sgb">
+        <div class="sat"><span class="ic">🔗</span><div class="grow"><b>Zararlı bağlantılı SMS'leri engelle</b><small>Mesajdaki bağlantı Siber Güvenlik Başkanlığı'nın zararlı adres listesindeyse bildirimi gelmez, uyarı gelir ve aşağıda listelenir. Rehberdeki kişilerden gelende yalnızca uyarılır.</small></div>${sw(sg.smsAcik, 'data-sgb="sms"')}</div>
+        <div class="sat"><span class="ic">🏛️</span><div class="grow"><b>SGB zararlı adres listesi</b><small data-v="sgb">${esc(sgbMetni(sg))}</small></div><button class="sm" data-a="sgbGuncelle">Şimdi güncelle</button></div>
       </div>
       <h4>Gelen kutusu</h4>
       <div class="kart stagger" style="--i:2"><div class="sat dik">
@@ -1173,7 +1193,7 @@ const SMS = {
       <h4>Yakalanan SMS'ler</h4>
       <div class="kart stagger" style="--i:4">${yak.length ? yak.slice(0, 200).map((m, i) => `<div class="sms" data-m="${i}">${avatar(m.gonderen)}
           <div class="grow"><div class="ust"><b class="ell">${esc(m.gonderen)}</b><small>${saat(m.zaman)}</small></div><div class="metin">${esc(m.metin)}</div>
-          <div class="tags"><span class="tag ${m.karar === 'gereksiz' ? 'bad' : ''}">${(KARAR[m.karar] || KARAR.normal)[0]}</span></div></div></div>`).join('') +
+          <div class="tags"><span class="tag ${m.karar === 'gereksiz' || m.karar === 'zararli' ? 'bad' : ''}">${KARAR_AD(m.karar)[0]}</span>${m.alan ? `<span class="tag bad">🔗 ${esc(m.alan)}</span>` : ''}</div></div></div>`).join('') +
           '<div class="sat"><div class="grow"></div><button class="sm ghost" data-a="temizle">Listeyi temizle</button></div>'
         : bos('📭', 'Yakalanan SMS yok', acik ? 'Gereksiz bir SMS geldiğinde bildirimi gösterilmez ve burada listelenir.' : 'Kalkan açıldığında yakalanan SMS\'ler burada görünür.')}</div>
     </div>`;
@@ -1191,10 +1211,13 @@ const SMS = {
       A.kuralEkle(s.kTur, deger, s.kKarar); toast('Kural eklendi.', 'ok'); yerindeCiz(s);
     });
     s.el.querySelectorAll('[data-ks]').forEach((b) => b.onclick = () => { A.kuralSil(b.dataset.ks); yerindeCiz(s); });
+    s.el.querySelectorAll('[data-sgb]').forEach((b) => b.onclick = () => { const v = !b.classList.contains('on'); b.classList.toggle('on', v); A.kalkanAyar('sgbSms', v ? '1' : '0'); });
+    on('sgbGuncelle', (e) => sgbGuncelleDugme(e.currentTarget, $('[data-v=sgb]', s.el)));
     s.el.querySelectorAll('[data-ayar]').forEach((b) => b.onclick = () => { const v = !b.classList.contains('on'); b.classList.toggle('on', v); A.kalkanAyar(b.dataset.ayar, v ? '1' : '0'); if (b.dataset.ayar === 'smsAcik') yerindeCiz(s); });
     s.el.querySelectorAll('.sms[data-m]').forEach((r) => r.onclick = () => {
       const m = yak[+r.dataset.m];
-      sheet(`<div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">${avatar(m.gonderen)}<div><h3 style="margin:0">${esc(m.gonderen)}</h3><small>${saat(m.zaman)} · ${(KARAR[m.karar] || KARAR.normal)[0]}</small></div></div>
+      sheet(`<div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">${avatar(m.gonderen)}<div><h3 style="margin:0">${esc(m.gonderen)}</h3><small>${saat(m.zaman)} · ${KARAR_AD(m.karar)[0]}</small></div></div>
+        ${m.karar === 'zararli' ? `<div class="banner" style="margin:0 0 10px"><span style="font-size:20px">⛔</span><div class="grow"><b>${esc(m.alan || '')}</b> Siber Güvenlik Başkanlığı'nın zararlı adres listesinde. Bağlantıya dokunmayın; mesajı SMS uygulamanızdan silin.<br><small>Kaynak: Siber Güvenlik Başkanlığı</small></div></div>` : ''}
         <div class="note" style="color:var(--text);font-size:14.5px;white-space:pre-wrap;user-select:text;-webkit-user-select:text">${esc(m.metin)}</div>
         <div class="acts"><button class="ghost" data-k>Kopyala</button><button class="pill" data-x>Kapat</button></div>`, (el) => {
         $('[data-x]', el).onclick = kapatSheet; $('[data-k]', el).onclick = () => { A.kopyala(m.metin); toast('Kopyalandı.', 'ok'); };
@@ -1517,7 +1540,7 @@ const GUVENLIK = {
     s.el.innerHTML = `<div class="wrap"><div class="gv-giris">
         ${s.sahne(false)}
         <h2>Bilinen zararlılara karşı tara</h2>
-        <small style="max-width:420px">Yüklü tüm uygulamaların APK dosyaları, paket adları ve imza sertifikaları ile telefondaki tüm dosyalar (İndirilenler, Belgeler, WhatsApp, Telegram, Bluetooth…) SHA-256 / SHA-1 / MD5 ile zararlı listesiyle karşılaştırılır.</small>
+        <small style="max-width:420px">Yüklü tüm uygulamaların APK dosyaları, paket adları ve imza sertifikaları ile telefondaki tüm dosyalar (İndirilenler, Belgeler, WhatsApp, Telegram, Bluetooth…) SHA-256 / SHA-1 / MD5 ile zararlı listesiyle karşılaştırılır. Son SMS'lerdeki ve panodaki bağlantılar da Siber Güvenlik Başkanlığı'nın zararlı adres listesinde aranır.</small>
         <div class="gv-bilgi"><span data-v="liste">${esc(s.listeMetni(b.liste))}</span></div>
         <button class="pill" data-a="basla">Taramayı başlat</button>
         ${b.sonuc ? '<button class="sm ghost" data-a="son">Son sonuca dön</button>' : ''}
@@ -1525,6 +1548,7 @@ const GUVENLIK = {
       ${!b.dosyaIzni ? `<div class="banner" style="margin:0 0 10px"><div class="grow">Dosyaları da taramak için <b>Tüm dosyalara erişim</b> gerekir. İzin olmadan yalnızca uygulamalar taranır.</div><button class="sm" data-a="izin">İzin ver</button></div>` : ''}
       <div class="kart"><div class="sat"><div class="grow"><b>200 MB üstü video ve müzikleri de tara</b><small>Kapalıyken büyük medya dosyaları atlanır (tarama çok daha hızlı biter). Diğer büyük dosyalar her zaman taranır.</small></div>${sw(b.buyukMedya, 'data-a="buyuk"')}</div>
         <div class="sat"><div class="grow"><b>Listeyi şimdi güncelle</b><small>Liste her gün kendiliğinden yenilenir.</small></div><button class="sm" data-a="guncelle">Güncelle</button></div></div>
+      ${s.bkKart()}
       <div class="note"><b>Bu tam bir antivirüs değildir.</b> Nefes yalnızca herkese açık listelerdeki <b>bilinen</b> zararlıları (dosya özeti, paket adı, imza sertifikası) ve dosya adı aldatmacalarını bulur; yeni ya da listede olmayan zararlıları yakalayamaz, davranış analizi yapmaz ve hiçbir şeyi kendiliğinden "temizlemez". Bulunanı kaldırmak ya da silmek sizin onayınızla olur.</div>
     </div>`;
     const on = (a, f) => { const x = $(`[data-a=${a}]`, s.el); if (x) x.onclick = f; };
@@ -1532,12 +1556,50 @@ const GUVENLIK = {
     on('son', () => { s.yeniTara = false; s.ciz(); });
     on('izin', () => A.dosyaIzniIste());
     on('buyuk', (e) => { const x = e.currentTarget, v = !x.classList.contains('on'); x.classList.toggle('on', v); A.guvenlikAyar(v); });
+    s.bkBagla();
     on('guncelle', async (e) => {
       const x = e.currentTarget; if (x.disabled) return; x.disabled = true; x.innerHTML = '<span class="spin"></span>';
       try { const r = await cagir('guvenlikListeGuncelle', true); toast(`Liste güncel: ${kisaSayi(r.toplam)} kayıt.`, 'ok'); $('[data-v=liste]', s.el).textContent = s.listeMetni(r); }
       catch (er) { toast('Liste indirilemedi: ' + er.message, 'err'); }
       x.disabled = false; x.textContent = 'Güncelle';
     });
+  },
+  // ---- Bağlantı kontrol et (SGB) ----
+  bkKart() {
+    return `<h4>Bağlantı kontrol et</h4><div class="kart" data-k="bk">
+      <div class="form"><input class="tam" data-i="bk" placeholder="Bağlantı, alan adı ya da SMS metni yapıştırın" value="${esc(this.bkMetin || '')}">
+        <button class="sm ghost" data-a="bkPano">Panodan yapıştır</button><button class="pill" data-a="bkKontrol" style="padding:10px 20px">Kontrol et</button></div>
+      <div data-v="bkSonuc">${this.bkSonucHtml()}</div>
+      <small style="display:block;padding:2px 0 12px">${esc(sgbMetni(sgbBilgi()))}. Önce telefondaki liste, ardından SGB'nin çevrim içi sorgusu kullanılır.</small></div>`;
+  },
+  bkSonucHtml() {
+    const r = this.bk; if (!r) return '';
+    if (r.yukleniyor) return '<div class="sat"><span class="spin"></span><div class="grow">Sorgulanıyor…</div></div>';
+    if (r.hata) return `<div class="note">${esc(r.hata)}</div>`;
+    return (r.sonuclar || []).map((x) => `<div class="sat" data-bk-sonuc="${x.zararli ? 'zararli' : x.dogrulandi ? 'temiz' : 'bilinmiyor'}"><span class="ic">${x.zararli ? '⛔' : x.dogrulandi ? '✅' : '❔'}</span>
+      <div class="grow"><b class="ell" style="display:block">${esc(x.alan)}</b>
+        <small>${x.zararli ? `${esc(x.kategori)}${x.eslesen && x.eslesen !== x.alan ? ` · listede: ${esc(x.eslesen)}` : ''}${x.tarih ? ` · ${esc(kisaTarih(x.tarih))}` : ''}` : x.dogrulandi ? 'Zararlı listesinde yok. Bu, adresin güvenli olduğu anlamına gelmez.' : 'Denetlenemedi: liste henüz inmedi ve SGB\'ye ulaşılamadı.'}</small>
+        <small style="display:block">Kaynak: Siber Güvenlik Başkanlığı</small></div>
+      <span class="tag ${x.zararli ? 'bad' : x.dogrulandi ? 'ok' : 'soft'}">${x.zararli ? 'Zararlı' : x.dogrulandi ? 'Listede yok' : 'Bilinmiyor'}</span></div>`).join('');
+  },
+  bkYaz() { const el = $('[data-v=bkSonuc]', this.el); if (el) el.innerHTML = this.bkSonucHtml(); },
+  async bkKontrol() {
+    const s = this, i = $('[data-i=bk]', s.el), m = ((i && i.value) || '').trim(); s.bkMetin = m;
+    if (!m) { toast('Önce bir bağlantı yazın ya da yapıştırın.', 'err'); return; }
+    if (s.bk && s.bk.yukleniyor) return;
+    s.bk = { yukleniyor: true }; s.bkYaz();
+    try { s.bk = await cagir('baglantiKontrol', m); } catch (e) { s.bk = { hata: e.message }; }
+    s.bkYaz();
+  },
+  bkBagla() {
+    const s = this, on = (a, f) => { const x = $(`[data-a=${a}]`, s.el); if (x) x.onclick = f; };
+    on('bkKontrol', () => s.bkKontrol());
+    on('bkPano', () => {
+      const t = A.panoMetni ? A.panoMetni() : '';
+      if (!t) { toast('Panoda metin yok.', 'err'); return; }
+      const i = $('[data-i=bk]', s.el); if (i) i.value = t; s.bkKontrol();
+    });
+    const i = $('[data-i=bk]', s.el); if (i) { i.oninput = () => { s.bkMetin = i.value; }; i.onkeydown = (e) => { if (e.key === 'Enter') s.bkKontrol(); }; }
   },
   basla() {
     const s = this, iz = izin();
@@ -1580,8 +1642,14 @@ const GUVENLIK = {
     const varMi = (x) => x.tur === 'uygulama' ? A.yuklu(x.pkg) : A.dosyaVar(x.yol);
     const zararli = (r.zararli || []).filter(varMi);
     const supheli = (r.supheli || []).filter((x) => !s.yoksay.has(x.yol) && varMi(x));
-    const temiz = !zararli.length;
+    const bag = r.baglanti || [];
+    const temiz = !zararli.length && !bag.length;
     const animasyon = s.yeniSonuc; s.yeniSonuc = false;
+    const bagKart = (x, k) => `<div class="bulgu stagger" style="--i:${Math.min(k, 12)}">
+        <div class="ust"><span class="fi">🔗</span><div class="grow"><b class="ell" style="display:block">${esc(x.alan)}</b>
+          <small class="ell">${x.kaynak === 'pano' ? 'Panodaki metin' : `SMS · ${esc(x.gonderen || 'Bilinmeyen')} · ${saat(x.zaman)}`}</small>
+          <div class="tags"><span class="tag bad">${esc(x.kategori || 'Zararlı adres')}</span></div></div></div>
+        <ul>${x.metin ? `<li>${esc(x.metin.slice(0, 160))}${x.metin.length > 160 ? '…' : ''}</li>` : ''}<li>Kaynak: Siber Güvenlik Başkanlığı${x.eslesen && x.eslesen !== x.alan ? ` (listede: ${esc(x.eslesen)})` : ''}</li></ul></div>`;
     const kart = (x, sup, k) => `<div class="bulgu ${sup ? 'sup' : ''} stagger" style="--i:${Math.min(k, 12)}">
         <div class="ust">${x.tur === 'uygulama' ? harfIkon(x.ad, 40) : `<span class="fi">${sup ? '⚠️' : '☣️'}</span>`}
           <div class="grow"><b class="ell" style="display:block">${esc(x.ad || x.pkg)}</b><small class="ell">${esc(x.tur === 'uygulama' ? x.pkg + (x.surum ? ' · ' + x.surum : '') : x.yol.replace(/^\/storage\/emulated\/0\//, '') + ' · ' + bytes(x.boyut))}</small>
@@ -1589,16 +1657,18 @@ const GUVENLIK = {
         <ul>${(x.nedenler || []).map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
         <div class="acts">${x.tur === 'uygulama' ? `<button class="sm" data-bilgi="${esc(x.pkg)}">Ayrıntılar</button><button class="sm pill danger" data-kaldir="${esc(x.pkg)}">Kaldır</button>`
           : `${sup ? `<button class="sm ghost" data-yoksay="${esc(x.yol)}">Yoksay</button>` : ''}<button class="sm pill danger" data-sil="${esc(x.yol)}">Sil</button>`}</div></div>`;
-    const ozetMetni = `${(r.uygulama || 0).toLocaleString('tr-TR')} uygulama, ${(r.dosya || 0).toLocaleString('tr-TR')} dosya, liste: ${kisaSayi(r.listeToplam)} kayıt, ${kisaTarih(r.listeTarih)}`;
+    const ozetMetni = `${(r.uygulama || 0).toLocaleString('tr-TR')} uygulama, ${(r.dosya || 0).toLocaleString('tr-TR')} dosya${r.smsTaranan ? `, ${r.smsTaranan.toLocaleString('tr-TR')} SMS` : ''}, liste: ${kisaSayi(r.listeToplam)} kayıt, ${kisaTarih(r.listeTarih)}`;
     s.el.innerHTML = `
       <div class="head"><div class="grow"><div class="headline">Güvenlik</div><small>Son tarama ${once(r.zaman)}${r.iptal ? ' · yarıda durduruldu' : ''}</small></div><button class="sm" data-a="yeniden">Yeniden tara</button></div>
       <div class="wrap">
         <div class="gv-ozet ${temiz ? '' : 'kotu'}">${animasyon ? '<i class="gv-patla"></i>' : ''}<div class="kalkan-ikon">${temiz ? SHIELD : SHIELD_KOTU}</div>
-          <div class="grow"><h3>${temiz ? (r.iptal ? 'Bu bölümde bilinen zararlı yok' : 'Bilinen zararlı bulunmadı') : `${zararli.length} zararlı bulundu`}</h3>
-            <small>${temiz ? `(${ozetMetni})` : 'Aşağıdakiler bilinen zararlı listesiyle birebir eşleşti. Kaldırmanız ya da silmeniz önerilir.'}</small></div></div>
+          <div class="grow"><h3>${temiz ? (r.iptal ? 'Bu bölümde bilinen zararlı yok' : 'Bilinen zararlı bulunmadı') : zararli.length ? `${zararli.length} zararlı bulundu${bag.length ? ` · ${bag.length} zararlı bağlantı` : ''}` : `${bag.length} zararlı bağlantı bulundu`}</h3>
+            <small>${temiz ? `(${ozetMetni})` : zararli.length ? 'Aşağıdakiler bilinen zararlı listesiyle birebir eşleşti. Kaldırmanız ya da silmeniz önerilir.' : 'SMS ya da panodaki bu bağlantılar Siber Güvenlik Başkanlığı\'nın zararlı adres listesinde. Dokunmayın.'}</small></div></div>
         ${!r.listeVar ? '<div class="note"><b>Zararlı listesi indirilemedi</b>; yalnızca dosya adı aldatmacaları denetlendi. İnternet bağlantısını kontrol edip yeniden tarayın.</div>' : ''}
         ${!r.dosyaIzni ? '<div class="banner" style="margin:0 0 10px"><div class="grow">Dosyalar taranmadı: <b>Tüm dosyalara erişim</b> izni yok.</div><button class="sm" data-a="izin">İzin ver</button></div>' : ''}
         ${zararli.length ? `<h4>Zararlı</h4>${zararli.map((x, k) => kart(x, false, k)).join('')}` : ''}
+        ${bag.length ? `<h4>Zararlı bağlantılar · ${bag.length}</h4><div class="note" style="margin-bottom:8px">Bu adresler Siber Güvenlik Başkanlığı'nın zararlı adres listesinde. Bağlantılara dokunmayın; Nefes SMS silemez, mesajları SMS uygulamanızdan silin.</div>${bag.map(bagKart).join('')}` : ''}
+        ${r.sgbVar === false ? '<div class="note">SGB zararlı adres listesi henüz inmediği için SMS ve panodaki bağlantılar denetlenmedi.</div>' : r.sgbVar && r.smsIzni === false ? '<div class="banner" style="margin:0 0 10px"><div class="grow">SMS\'lerdeki bağlantılar denetlenmedi: <b>SMS okuma</b> izni yok.</div><button class="sm" data-a="smsIzin">İzin ver</button></div>' : ''}
         ${supheli.length ? `<h4>Şüpheli · ${supheli.length}</h4><div class="note" style="margin-bottom:8px">Listede değil ama kendini başka bir şeymiş gibi gösteren dosyalar. Tanımıyorsanız silin.</div>${supheli.map((x, k) => kart(x, true, k)).join('')}` : ''}
         <div class="gv-istat">
           <div><b>${(r.uygulama || 0).toLocaleString('tr-TR')}</b><small>uygulama</small></div>
@@ -1607,11 +1677,14 @@ const GUVENLIK = {
         ${r.atlanan ? `<div class="note">${r.atlanan} büyük medya dosyası (${bytes(r.atlananBoyut)}) atlandı. Ayarlardan "200 MB üstü video ve müzikleri de tara"yı açıp yeniden tarayabilirsiniz.</div>` : ''}
         <div class="note">Liste: ${kisaSayi(r.listeToplam)} kayıt (${kisaTarih(r.listeTarih)}). Nefes tam bir antivirüs değildir; yalnızca bilinen zararlıları bulur.
           <div class="arac" style="margin:10px 0 0"><button class="sm" data-a="kaynak">Kaynaklar</button><button class="sm" data-a="ayar">Tarama ayarları</button></div></div>
+        ${s.bkKart()}
       </div>`;
     const on = (a, f) => { const x = $(`[data-a=${a}]`, s.el); if (x) x.onclick = f; };
     on('yeniden', () => s.basla());
     on('izin', () => A.dosyaIzniIste());
     on('ayar', () => { s.yeniTara = true; s.ciz(); });
+    on('smsIzin', () => A.izinIste('sms'));
+    s.bkBagla();
     on('kaynak', () => {
       const l = guvBilgi().liste || {};
       sheet(`<h3>Zararlı listesi</h3><small>${kisaSayi(l.toplam)} kayıt · ${kisaSayi(l.hash)} dosya özeti · ${l.paket || 0} paket adı · ${l.sertifika || 0} imza sertifikası · ${kisaTarih(l.tarih)}</small>
@@ -2260,6 +2333,8 @@ if (A) setTimeout(() => ARAMA.guncelle(false), 2500);
 if (A && A.arayuzDenetle) setTimeout(() => arayuzGuncelle(false), 1800);
 // Zararlı listesi: açılışta (son indirmeden 20 saat geçtiyse) yalnızca değişen kısmı iner.
 if (A && A.guvenlikListeGuncelle) setTimeout(() => cagir('guvenlikListeGuncelle', false).catch(() => {}), 4000);
+// SGB zararlı alan adı listesi: açılışta (son denetimden 20 saat geçtiyse) ETag ile; değişmediyse inmez.
+if (A && A.sgbGuncelle) setTimeout(() => cagir('sgbGuncelle', false).catch(() => {}), 5000);
 // Sayfa sorunsuz açıldı: indirilen (OTA) arayüz bu sinyali vermezse uygulama paketteki arayüze döner.
 window.__hazir = true;
 </script>
