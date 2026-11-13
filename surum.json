@@ -1,0 +1,9 @@
+{
+ "surum": "1.16",
+ "yapi": "16",
+ "ipa": "https://raw.githubusercontent.com/gokhangeo/apk/nefes-imzali/Nefes.ipa?v=1.16",
+ "manifest": "https://raw.githubusercontent.com/gokhangeo/apk/nefes-imzali/Nefes.plist",
+ "notlar": "Nefes iOS: imzalı (Ad Hoc) kurulum otomatik güncellenir — derleme sonrası zincirle imzala, gokhangeo/apk nefes-imzali dalına manifest+IPA+surum.json; uygulamada güncelleme şeridi, bildirim, Ayarlar → Güncelleme",
+ "paket": "com.gokhan.nefes.RDYFR8KV2N",
+ "tarih": "2026-11-13T20:23:46Z"
+}
