@@ -1133,7 +1133,7 @@ const KARAR = { normal: ['Normal', '#7cc4ff'], islem: ['İşlem', '#6ee0a0'], pr
 const KARAR_AD = (k) => k === 'zararli' ? ['Zararlı bağlantı', '#ff4d6d'] : (KARAR[k] || KARAR.normal);
 const sgbBilgi = () => jsonOku(() => A.sgbBilgi(), { var: false, sayi: 0, smsAcik: true, guncelleme: '', indirme: 0, hata: '' });
 const sgbMetni = (b) => b && b.var
-  ? `${kisaSayi(b.sayi)} zararlı alan adı${b.guncelleme ? ' · liste ' + kisaTarih(b.guncelleme) : ''}${b.indirme ? ' · indirildi ' + once(b.indirme) : ''}`
+  ? `${kisaSayi(b.sayi)} zararlı alan adı${b.yedek ? ' (yedek: SGB\'nin en yeni kayıtları)' : ''}${b.guncelleme ? ' · liste ' + kisaTarih(b.guncelleme) : ''}${b.indirme ? ' · indirildi ' + once(b.indirme) : ''}`
   : `Liste henüz inmedi${b && b.hata ? ` (${b.hata})` : ''} · internet varken kendiliğinden iner`;
 async function sgbGuncelleDugme(x, etiket) {
   if (!x || x.disabled) return; x.disabled = true; const eski = x.textContent; x.innerHTML = '<span class="spin"></span>';
