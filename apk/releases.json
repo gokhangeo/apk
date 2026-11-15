@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ucuzu-nerde-v1.0.2",
+  "name": "Ucuzu Nerde 1.0.2",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "UcuzuNerde.apk",
+    "size": 43435542,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=2"
+   }
+  ]
+ },
+ {
   "tag_name": "zip-zip-v1.30",
   "name": "zip-zip-v1.30",
   "draft": false,
