@@ -1,15 +1,15 @@
 [
  {
-  "tag_name": "ucuzu-nerde-v1.0.4",
-  "name": "Ucuzu Nerde 1.0.4",
+  "tag_name": "ucuzu-nerde-v1.0.5",
+  "name": "Ucuzu Nerde 1.0.5",
   "draft": false,
   "prerelease": false,
   "body": "",
   "assets": [
    {
     "name": "UcuzuNerde.apk",
-    "size": 994797,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=4"
+    "size": 995045,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=5"
    }
   ]
  },
