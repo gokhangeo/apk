@@ -165,21 +165,23 @@ function nightFrame() {
   if (w && h) {
     const sc = Math.min(1, 640 / Math.max(w, h)), W = Math.round(w * sc), H = Math.round(h * sc);
     if (nv.width !== W || nv.height !== H) { nv.width = W; nv.height = H; acc = null; }
-    nctx.drawImage(v, 0, 0, W, H);
+    nctx.filter = "blur(1.2px)"; nctx.drawImage(v, 0, 0, W, H); nctx.filter = "none";
     const img = nctx.getImageData(0, 0, W, H), d = img.data;
     let sum = 0, n = 0;
     for (let i = 0; i < d.length; i += 64) { sum += d[i] * .3 + d[i + 1] * .59 + d[i + 2] * .11; n++; }
-    const target = Math.max(1, Math.min(14, 0.42 / Math.max(sum / n / 255, 0.01)));
-    gain += (target - gain) * 0.12; buildLut(gain);
-    const first = !acc; if (first) acc = new Float32Array(d.length);
-    const k = 0.45, green = night === 2;
-    for (let i = 0; i < d.length; i += 4) {
-      let r = lut[d[i]], g = lut[d[i + 1]], b = lut[d[i + 2]];
-      if (green) { const y = r * .3 + g * .59 + b * .11; r = y * .22; g = y; b = y * .28; }
-      if (first) { acc[i] = r; acc[i + 1] = g; acc[i + 2] = b; }
-      else { acc[i] += (r - acc[i]) * k; acc[i + 1] += (g - acc[i + 1]) * k; acc[i + 2] += (b - acc[i + 2]) * k; }
-      d[i] = acc[i]; d[i + 1] = acc[i + 1]; d[i + 2] = acc[i + 2];
+    const mean = sum / n / 255;
+    // Renk gürültüsü (mor lekeler) karanlıkta en kötüsü: yalnızca parlaklık kullanılır, kazanç sınırlı.
+    const target = Math.max(1, Math.min(6, 0.38 / Math.max(mean, 0.02)));
+    gain += (target - gain) * 0.1; buildLut(gain);
+    const first = !acc; if (first) acc = new Float32Array(d.length / 4);
+    const k = 0.22, green = night === 2;
+    for (let i = 0, j = 0; i < d.length; i += 4, j++) {
+      const y = lut[(d[i] * .3 + d[i + 1] * .59 + d[i + 2] * .11) | 0];
+      acc[j] = first ? y : acc[j] + (y - acc[j]) * k;
+      const a = acc[j];
+      if (green) { d[i] = a * .22; d[i + 1] = a; d[i + 2] = a * .28; } else { d[i] = d[i + 1] = d[i + 2] = a; }
     }
+    if (!CALL) status(mean < 0.03 ? "Canlı ● çok karanlık, ışık yok" : "Canlı ● gece");
     nctx.putImageData(img, 0, 0);
   }
   if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(nightFrame); else requestAnimationFrame(nightFrame);
