@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ucuzu-nerde-v1.0.15",
+  "name": "Ucuzu Nerde 1.0.15",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "UcuzuNerde.apk",
+    "size": 1002521,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=15"
+   }
+  ]
+ },
+ {
   "tag_name": "turbo-kosu-v1.3",
   "name": "turbo-kosu-v1.3",
   "draft": false,
@@ -113,20 +127,6 @@
     "name": "UcuzuNerde-test.apk",
     "size": 1003229,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde-test.apk?v=13"
-   }
-  ]
- },
- {
-  "tag_name": "ucuzu-nerde-v1.0.12",
-  "name": "Ucuzu Nerde 1.0.12",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "UcuzuNerde.apk",
-    "size": 1002521,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=12"
    }
   ]
  },
