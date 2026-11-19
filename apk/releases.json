@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "klipler-v1.0.7",
+  "name": "Klipler 1.0.7",
+  "draft": false,
+  "prerelease": false,
+  "body": "CI: Linux işleri LINUX_RUNNER değişkeniyle Oracle runner'a yönlendirilebilir (#98)\n\nMüzik klipleri: kategoriler, arama, klipler uygulama içinde doğrudan oynar. TV box (kumanda) ve telefon.",
+  "assets": [
+   {
+    "name": "Klipler.apk",
+    "size": 5630982,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=7"
+   }
+  ]
+ },
+ {
   "tag_name": "pamuk-v1.1.46",
   "name": "Pamuk 1.1.46",
   "draft": false,
@@ -230,20 +244,6 @@
     "name": "TurkIPTV.apk",
     "size": 1859151,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/TurkIPTV.apk?v=166"
-   }
-  ]
- },
- {
-  "tag_name": "klipler-v1.0.4",
-  "name": "Klipler 1.0.4",
-  "draft": false,
-  "prerelease": false,
-  "body": "Klipler: Canlı Müzik artık TV kanalları (Kral Pop, Kral TV, Number 1, Power, Dream Türk, TRT Müzik) — HLS doğrudan, yedek adres\n\nMüzik klipleri: kategoriler, arama, klipler uygulama içinde doğrudan oynar. TV box (kumanda) ve telefon.",
-  "assets": [
-   {
-    "name": "Klipler.apk",
-    "size": 5630991,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=4"
    }
   ]
  },
