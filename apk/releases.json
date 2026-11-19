@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ev-ekrani-v0.2.65",
+  "name": "Ev Ekranı 0.2.65",
+  "draft": false,
+  "prerelease": false,
+  "body": "CI: Linux işleri LINUX_RUNNER değişkeniyle Oracle runner'a yönlendirilebilir (#98)\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
+  "assets": [
+   {
+    "name": "EvEkrani.apk",
+    "size": 55684848,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=65"
+   }
+  ]
+ },
+ {
   "tag_name": "netlik-v1.3",
   "name": "netlik-v1.3",
   "draft": false,
@@ -202,20 +216,6 @@
     "name": "AkilliOgretmen.apk",
     "size": 99039,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/AkilliOgretmen.apk?v=8"
-   }
-  ]
- },
- {
-  "tag_name": "ev-ekrani-v0.2.59",
-  "name": "Ev Ekranı 0.2.59",
-  "draft": false,
-  "prerelease": false,
-  "body": "Dosyalar: Uygulamalar bölümü — yüklü uygulamalar boyutlarıyla, OK ile kaldır / aç / bilgi\n\nXiaomi TV kutusu için Ev Ekranı. Kurulum için depodaki ev-ekrani/README.md dosyasına bakın.",
-  "assets": [
-   {
-    "name": "EvEkrani.apk",
-    "size": 55684848,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/EvEkrani.apk?v=59"
    }
   ]
  },
