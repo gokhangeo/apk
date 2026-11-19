@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "netlik-v1.3",
+  "name": "netlik-v1.3",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Netlik.apk",
+    "size": 209464,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.apk?v=3"
+   }
+  ]
+ },
+ {
   "tag_name": "ucuzu-nerde-v1.0.15",
   "name": "Ucuzu Nerde 1.0.15",
   "draft": false,
@@ -160,20 +174,6 @@
     "name": "netlik-sidestore.json",
     "size": 975,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/netlik-sidestore.json?v=1"
-   }
-  ]
- },
- {
-  "tag_name": "netlik-v1.1",
-  "name": "netlik-v1.1",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "Netlik.apk",
-    "size": 209460,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Netlik.apk?v=1"
    }
   ]
  },
