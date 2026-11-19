@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "bulutsuz-v1.0.5",
+  "name": "Bulutsuz 1.0.5",
+  "draft": false,
+  "prerelease": false,
+  "body": "CI: Linux işleri LINUX_RUNNER değişkeniyle Oracle runner'a yönlendirilebilir (#98)\n\nBulutsuz Transfer Android: Paylaş menüsünden bulutsuz (WebRTC) gönderim, QR ile alma, alınan dosyalar İndirilenler/Bulutsuz klasörüne. iPhone (hub-ios) ve Windows ile uyumlu.",
+  "assets": [
+   {
+    "name": "Bulutsuz.apk",
+    "size": 642677,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Bulutsuz.apk?v=5"
+   }
+  ]
+ },
+ {
   "tag_name": "zip-zip-v1.32",
   "name": "zip-zip-v1.32",
   "draft": false,
@@ -216,20 +230,6 @@
     "name": "Dosyalar.apk",
     "size": 1707580,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Dosyalar.apk?v=1"
-   }
-  ]
- },
- {
-  "tag_name": "bulutsuz-v1.0.2",
-  "name": "Bulutsuz 1.0.2",
-  "draft": false,
-  "prerelease": false,
-  "body": "Bulutsuz: alınan dosyayı aç düğmesi, kayıt için yedek klasör\n\nBulutsuz Transfer Android: Paylaş menüsünden bulutsuz (WebRTC) gönderim, QR ile alma, alınan dosyalar İndirilenler/Bulutsuz klasörüne. iPhone (hub-ios) ve Windows ile uyumlu.",
-  "assets": [
-   {
-    "name": "Bulutsuz.apk",
-    "size": 642673,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Bulutsuz.apk?v=2"
    }
   ]
  },
