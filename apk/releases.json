@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "ucuzu-nerde-v1.0.22",
+  "name": "Ucuzu Nerde 1.0.22",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "UcuzuNerde.apk",
+    "size": 1010430,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=22"
+   }
+  ]
+ },
+ {
   "tag_name": "winkeeper-android-v0.1.26",
   "name": "Nefes 0.1.26",
   "draft": false,
@@ -52,20 +66,6 @@
     "name": "MinikDostlar.apk",
     "size": 4875069,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/MinikDostlar.apk?v=13"
-   }
-  ]
- },
- {
-  "tag_name": "ucuzu-nerde-v1.0.17",
-  "name": "Ucuzu Nerde 1.0.17",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "UcuzuNerde.apk",
-    "size": 1004885,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/UcuzuNerde.apk?v=17"
    }
   ]
  },
