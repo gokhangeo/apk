@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "pamuk-v1.1.48",
+  "name": "Pamuk 1.1.48",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Pamuk.apk",
+    "size": 41625678,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Pamuk.apk?v=49"
+   }
+  ]
+ },
+ {
   "tag_name": "ucuzu-nerde-v1.0.28",
   "name": "Ucuzu Nerde 1.0.28",
   "draft": false,
@@ -197,20 +211,6 @@
     "name": "Klipler.apk",
     "size": 5630982,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Klipler.apk?v=7"
-   }
-  ]
- },
- {
-  "tag_name": "pamuk-v1.1.46",
-  "name": "Pamuk 1.1.46",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "Pamuk.apk",
-    "size": 41623814,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Pamuk.apk?v=47"
    }
   ]
  },
