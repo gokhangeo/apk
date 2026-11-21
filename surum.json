@@ -1,0 +1,9 @@
+{
+ "surum": "1.4.12-1007",
+ "yapi": "1007",
+ "ipa": "https://raw.githubusercontent.com/gokhangeo/apk/reis-imzali/Reis.ipa?v=1.4.12-1007",
+ "manifest": "https://raw.githubusercontent.com/gokhangeo/apk/reis-imzali/Reis.plist",
+ "notlar": "Kodcu Börü: Reis (apps/mobile) ajanı telefonla arama özelliği, NUMARASIZ ve ücrets (#2)",
+ "paket": "com.gokhan.asistan.RDYFR8KV2N",
+ "tarih": "2026-11-21T11:02:10Z"
+}
