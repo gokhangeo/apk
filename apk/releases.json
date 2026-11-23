@@ -1,7 +1,7 @@
 [
  {
-  "tag_name": "sabit-kamera-v1.0.5",
-  "name": "Sabit Kamera 1.0.5",
+  "tag_name": "sabit-kamera-v1.0.6",
+  "name": "Sabit Kamera 1.0.6",
   "draft": false,
   "prerelease": false,
   "body": "",
@@ -9,7 +9,7 @@
    {
     "name": "SabitKamera.apk",
     "size": 2356097,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/SabitKamera.apk?v=6"
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/SabitKamera.apk?v=7"
    }
   ]
  },
