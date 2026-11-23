@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "reis-android-v1.0.1",
+  "name": "Reis 1.0.1",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "Reis.apk",
+    "size": 1357697,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Reis.apk?v=2"
+   }
+  ]
+ },
+ {
   "tag_name": "ucuzu-nerde-v1.0.37",
   "name": "Ucuzu Nerde 1.0.37",
   "draft": false,
