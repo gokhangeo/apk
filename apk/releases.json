@@ -1,7 +1,7 @@
 [
  {
-  "tag_name": "reis-android-v1.0.2",
-  "name": "Reis 1.0.2",
+  "tag_name": "reis-android-v1.0.3",
+  "name": "Reis 1.0.3",
   "draft": false,
   "prerelease": false,
   "body": "",
@@ -9,7 +9,7 @@
    {
     "name": "Reis.apk",
     "size": 1357701,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Reis.apk?v=3"
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Reis.apk?v=4"
    }
   ]
  },
