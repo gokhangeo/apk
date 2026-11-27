@@ -1,5 +1,19 @@
 [
  {
+  "tag_name": "sabit-kamera-v1.0.7",
+  "name": "Sabit Kamera 1.0.7",
+  "draft": false,
+  "prerelease": false,
+  "body": "",
+  "assets": [
+   {
+    "name": "SabitKamera.apk",
+    "size": 2356097,
+    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/SabitKamera.apk?v=8"
+   }
+  ]
+ },
+ {
   "tag_name": "reis-android-v1.0.9",
   "name": "Reis 1.0.9",
   "draft": false,
@@ -10,20 +24,6 @@
     "name": "Reis.apk",
     "size": 1374421,
     "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/Reis.apk?v=10"
-   }
-  ]
- },
- {
-  "tag_name": "sabit-kamera-v1.0.6",
-  "name": "Sabit Kamera 1.0.6",
-  "draft": false,
-  "prerelease": false,
-  "body": "",
-  "assets": [
-   {
-    "name": "SabitKamera.apk",
-    "size": 2356097,
-    "browser_download_url": "https://raw.githubusercontent.com/gokhangeo/apk/main/apk/SabitKamera.apk?v=7"
    }
   ]
  },
